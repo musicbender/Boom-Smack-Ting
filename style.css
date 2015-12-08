@@ -29,7 +29,7 @@ h2 {
 }
 
 .trigger {
-    margin: 0 10px 0 10px;
+    margin: 0 20px 0 20px;
     height: 100px;
     width: 15%;
     padding: 60px 10px 0 10px;
@@ -56,4 +56,10 @@ h2 {
 
 .tsst {
     background-color: orange;
+}
+
+.hit {
+    background-color: darkred;
+    height: 120px;
+    width: 17%;
 }

@@ -45,42 +45,66 @@ $(document).ready(function(){
 
     }
 
-  
      var sound = audioBatchLoader({
          boom: "audio/slammingcardoor.mp3",
-         smack: "audio/stickshot1.wav",
-         tsst: "audio/timpani_bowl_roots001.wav"
+         smack1: "audio/stickshot1.wav",
+         smack2: "audio/stickshot2.wav",
+         smack3: "audio/stickshot3.wav",
+         tsst1: "audio/timpani_bowl_roots001.wav",
+         tsst2: "audio/timpani_bowl_roots002.wav",
+         tsst3: "audio/timpani_bowl_roots003.wav"
      });
     
-    $('.trigger').click(function(){
+    $('.trigger').mousedown(function(){
         if ($(this).hasClass('boom')){
             sound.boom.play(context.currentTime);
+            $('.boom').addClass('hit');
         }
         else if ($(this).hasClass('smack')){
-            sound.smack.play(context.currentTime);
+            sound.smack1.play(context.currentTime);
+            $('.smack').addClass('hit');
         }
         else if ($(this).hasClass('tsst')){
-            sound.tsst.play(context.currentTime);
+            sound.tsst1.play(context.currentTime);
+            $('.tsst').addClass('hit');
         }
         else {
             console.log('ERROR');
         }
     });
     
+    $('.trigger').mouseup(function(){
+        $('.trigger').removeClass('hit');
+    });
+        
+        
     $(document).keydown(function(e){
         if (e.which == 66){
             sound.boom.play(context.currentTime);
+            $('.boom').addClass('hit');
         }
         else if (e.which == 78){
-            sound.smack.play(context.currentTime);
+            sound.smack1.play(context.currentTime);
+            $('.smack').addClass('hit');
         }
         else if (e.which == 77) {
-            sound.tsst.play(context.currentTime);
+            sound.tsst1.play(context.currentTime);
+            $('.tsst').addClass('hit');
         }
         else {
             console.log('ERROR');
         }
     });
+    
+    $(document).keyup(function(){
+        $('.trigger').removeClass('hit');b
+    });
+    
+    function randomNum () {
+        var num = Math.floor(Math.random() * 2);
+        return num;
+    }
+
     
 });
 
