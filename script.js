@@ -1,38 +1,65 @@
 $(document).ready(function(){
 
-    var context = new AudioContext(),
-        getSound = new XMLHttpRequest(),
-        snare;
+    var context = new AudioContext();
 
-    getSound.open("GET", "snare.mp3", true);
-    getSound.responseType = 'arraybuffer';
+    function audioFileLoader(fileDirectory) {
+        var soundObj = {};
+        soundObj.fileDirectory = fileDirectory;
+        var playSound = undefined;
+        var getSound = new XMLHttpRequest();
+        getSound.open("GET", soundObj.fileDirectory, true);
+        getSound.responseType = "arraybuffer";
+        getSound.onload = function() {
+            context.decodeAudioData(getSound.response, function(buffer) {
+                soundObj.soundToPlay = buffer;
+            });
+        }
 
-    getSound.onload = function() {
-        context.decodeAudioData(getSound.response, function(buffer) {
-        snare = buffer;
-        });
+        getSound.send();
+
+
+        soundObj.play = function() {
+            playSound = context.createBufferSource();
+            playSound.buffer = soundObj.soundToPlay;
+            playSound.connect(context.destination)
+            playSound.start(context.currentTime)
+        }
+
+        soundObj.stop = function() {
+
+            playSound.stop(context.currentTime)
+        }
+
+        return soundObj;
+
+    };
+
+
+    function audioBatchLoader(obj) {
+
+        for (prop in obj) {
+            obj[prop] = audioFileLoader(obj[prop])
+
+        }
+        return obj
+
     }
 
-    getSound.send();
+  
+     var sound = audioBatchLoader({
+         snare: "audio/snare.mp3",
+         sound1: "audio/sound1.mp3",
+         sound2: "audio/sound2.mp3",
+         sound3: "audio/sound3.mp3"
+     });
     
-    $('#sub-btn').click(function() {
-        var playSound = context.createBufferSource();
-        playSound.buffer = snare;
-        playSound.connect(context.destination);
-        playSound.start(0);
+    $(document).click(function(){
+        sound.sound1.play(context.currentTime);
     });
 });
 
 
-//Checking on the server stuff
-    /*getSound.onreadystatechange = function () {
-        if (getSound.readyState == 4 && getSound.status == 200) {
-            $('#scores').html(getSound.responseText);
-        }
-        else {
-            $('#scores').html('<p>Waiting for Server Response...' + getSound.status + getSound.readyState + '</p>');
-        }
-    }*/
+
     
     
     

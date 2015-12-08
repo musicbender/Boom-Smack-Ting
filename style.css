@@ -12,6 +12,8 @@ body, html {
     text-align: center;
     color: white;
     font-size:2.25em;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 #sub-btn:hover {
