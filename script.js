@@ -55,21 +55,33 @@ $(document).ready(function(){
     $('.trigger').click(function(){
         if ($(this).hasClass('boom')){
             sound.boom.play(context.currentTime);
-            console.log('boom');
         }
         else if ($(this).hasClass('smack')){
             sound.smack.play(context.currentTime);
-            console.log('smack');
         }
         else if ($(this).hasClass('tsst')){
             sound.tsst.play(context.currentTime);
-            console.log('tsst');
         }
         else {
             console.log('ERROR');
         }
-        
     });
+    
+    $(document).keydown(function(e){
+        if (e.which == 66){
+            sound.boom.play(context.currentTime);
+        }
+        else if (e.which == 78){
+            sound.smack.play(context.currentTime);
+        }
+        else if (e.which == 77) {
+            sound.tsst.play(context.currentTime);
+        }
+        else {
+            console.log('ERROR');
+        }
+    });
+    
 });
 
 
