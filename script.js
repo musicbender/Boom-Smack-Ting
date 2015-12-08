@@ -47,14 +47,28 @@ $(document).ready(function(){
 
   
      var sound = audioBatchLoader({
-         snare: "audio/snare.mp3",
-         sound1: "audio/sound1.mp3",
-         sound2: "audio/sound2.mp3",
-         sound3: "audio/sound3.mp3"
+         boom: "audio/slammingcardoor.mp3",
+         smack: "audio/stickshot1.wav",
+         tsst: "audio/timpani_bowl_roots001.wav"
      });
     
-    $(document).click(function(){
-        sound.sound1.play(context.currentTime);
+    $('.trigger').click(function(){
+        if ($(this).hasClass('boom')){
+            sound.boom.play(context.currentTime);
+            console.log('boom');
+        }
+        else if ($(this).hasClass('smack')){
+            sound.smack.play(context.currentTime);
+            console.log('smack');
+        }
+        else if ($(this).hasClass('tsst')){
+            sound.tsst.play(context.currentTime);
+            console.log('tsst');
+        }
+        else {
+            console.log('ERROR');
+        }
+        
     });
 });
 
