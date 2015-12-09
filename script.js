@@ -33,7 +33,7 @@ $(document).ready(function(){
 
     };
 
-
+    //loop through list of audio files
     function audioBatchLoader(obj) {
 
         for (prop in obj) {
@@ -42,6 +42,7 @@ $(document).ready(function(){
         return obj
     }
 
+    //batch audio loader
      var sound = audioBatchLoader({
          boom: "audio/slammingcardoor.mp3",
          smack1: "audio/stickshot1.wav",
@@ -52,6 +53,31 @@ $(document).ready(function(){
          tsst3: "audio/timpani_bowl_roots003.wav"
      });
     
+    //Random number between 1 and 3 for Round Robin
+    function randomNum () {
+        var num = Math.floor(Math.random() * 3);
+        return num;
+    }
+
+    //Play sound with Round Robin
+    function roundRobinPlay (sound1, sound2, sound3, trigger) {
+        var sounds = [sound1, sound2, sound3];
+        var rr = randomNum();
+        if ((sound2 !== null) && (sound3 !== null)){
+            sounds[rr].play(context.currentTime);
+            trigger.addClass('hit');
+        }
+        else {
+            sound1.play(context.currentTime);
+            trigger.addClass('hit');
+            console.log('DEBUG: else');
+        }
+    }
+    
+    
+    /*-----Trigger sounds-----*/
+    
+    //Trigger with mouse click.
     $('.trigger').mousedown(function(){
         if ($(this).hasClass('boom')){
             sound.boom.play(context.currentTime);
@@ -74,19 +100,16 @@ $(document).ready(function(){
         $('.trigger').removeClass('hit');
     });
         
-        
+    //Trigger with keydown b, n, and m. 
     $(document).keydown(function(e){
         if (e.which == 66){
-            sound.boom.play(context.currentTime);
-            $('.boom').addClass('hit');
+            roundRobinPlay(sound.boom, null, null, $('.boom'));
         }
         else if (e.which == 78){
-            sound.smack1.play(context.currentTime);
-            $('.smack').addClass('hit');
+            roundRobinPlay(sound.smack1, sound.smack2, sound.smack3, $('.smack'));
         }
         else if (e.which == 77) {
-            sound.tsst1.play(context.currentTime);
-            $('.tsst').addClass('hit');
+            roundRobinPlay(sound.tsst1, sound.tsst2, sound.tsst3, $('.tsst'));
         }
         else {
             console.log('ERROR');
@@ -94,19 +117,8 @@ $(document).ready(function(){
     });
     
     $(document).keyup(function(){
-        $('.trigger').removeClass('hit');b
+        $('.trigger').removeClass('hit');
     });
-    
-    function randomNum () {
-        var num = Math.floor(Math.random() * 2);
-        return num;
-    }
-    
-//trying to make a function that picks a round robin sound. might have to do it inside
-    //var sound? a method with a for/in loop that picks at random?
-
-
-    
 });
 
 
