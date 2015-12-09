@@ -17,7 +17,6 @@ $(document).ready(function(){
 
         getSound.send();
 
-
         soundObj.play = function() {
             playSound = context.createBufferSource();
             playSound.buffer = soundObj.soundToPlay;
@@ -39,10 +38,8 @@ $(document).ready(function(){
 
         for (prop in obj) {
             obj[prop] = audioFileLoader(obj[prop])
-
         }
         return obj
-
     }
 
      var sound = audioBatchLoader({
@@ -104,6 +101,10 @@ $(document).ready(function(){
         var num = Math.floor(Math.random() * 2);
         return num;
     }
+    
+//trying to make a function that picks a round robin sound. might have to do it inside
+    //var sound? a method with a for/in loop that picks at random?
+
 
     
 });
