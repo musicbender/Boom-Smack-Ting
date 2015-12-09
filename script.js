@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    var context = new AudioContext();
+    var context = new (window.AudioContext || window.webkitAudioContext)();
 
     function audioFileLoader(fileDirectory) {
         var soundObj = {};
@@ -35,7 +35,6 @@ $(document).ready(function(){
 
     //loop through list of audio files
     function audioBatchLoader(obj) {
-
         for (prop in obj) {
             obj[prop] = audioFileLoader(obj[prop])
         }
