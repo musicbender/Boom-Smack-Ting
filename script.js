@@ -25,7 +25,6 @@ $(document).ready(function(){
         }
 
         soundObj.stop = function() {
-
             playSound.stop(context.currentTime)
         }
 
@@ -69,7 +68,6 @@ $(document).ready(function(){
         else {
             sound1.play(context.currentTime);
             trigger.addClass('hit');
-            console.log('DEBUG: else');
         }
     }
     
