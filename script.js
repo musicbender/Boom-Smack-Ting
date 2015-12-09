@@ -80,16 +80,13 @@ $(document).ready(function(){
     //Trigger with mouse click.
     $('.trigger').mousedown(function(){
         if ($(this).hasClass('boom')){
-            sound.boom.play(context.currentTime);
-            $('.boom').addClass('hit');
+            roundRobinPlay(sound.boom, null, null, $('.boom'));
         }
         else if ($(this).hasClass('smack')){
-            sound.smack1.play(context.currentTime);
-            $('.smack').addClass('hit');
+            roundRobinPlay(sound.smack1, sound.smack2, sound.smack3, $('.smack'));
         }
         else if ($(this).hasClass('tsst')){
-            sound.tsst1.play(context.currentTime);
-            $('.tsst').addClass('hit');
+            roundRobinPlay(sound.tsst1, sound.tsst2, sound.tsst3, $('.tsst'));
         }
         else {
             console.log('ERROR');
