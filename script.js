@@ -1,11 +1,12 @@
 $(document).ready(function(){
 
     var context = new (window.AudioContext || window.webkitAudioContext)();
-
+    var playSound = undefined;
+    
     function audioFileLoader(fileDirectory) {
         var soundObj = {};
         soundObj.fileDirectory = fileDirectory;
-        var playSound = undefined;
+/*var*/ playSound = undefined;
         var getSound = new XMLHttpRequest();
         getSound.open("GET", soundObj.fileDirectory, true);
         getSound.responseType = "arraybuffer";
@@ -18,6 +19,7 @@ $(document).ready(function(){
         getSound.send();
 
         soundObj.play = function() {
+           console.log(soundObj);
             playSound = context.createBufferSource();
             playSound.buffer = soundObj.soundToPlay;
             playSound.connect(context.destination)
@@ -27,6 +29,11 @@ $(document).ready(function(){
         soundObj.stop = function() {
             playSound.stop(context.currentTime)
         }
+        
+        //creating a GAIN node
+        //var gainNode = context.createGain();
+        //playSound.connect(gainNode);
+        //gainNode.connect(context.destination);
 
         return soundObj;
 
