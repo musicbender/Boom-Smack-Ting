@@ -19,9 +19,9 @@ $(document).ready(function(){
         getSound.send();
 
         soundObj.play = function() {
-           console.log(soundObj);
             playSound = context.createBufferSource();
             playSound.buffer = soundObj.soundToPlay;
+            playSound.playbackRate.value = (Math.random() * (1.04 - 0.96) + 0.96); //random pitch
             playSound.connect(context.destination)
             playSound.start(context.currentTime)
         }
