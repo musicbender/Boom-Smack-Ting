@@ -4,9 +4,7 @@ body, html {
     font-family: Montserrat;
 }
 
-
 /*Instructions*/
-
 .instructions {
     margin: 20px auto;
     width: 100%;
@@ -21,7 +19,6 @@ h1 {
 h2 {
     font-size: 1.25em;
 }
-
 
 /*Triggers*/
 .sampler {

@@ -44,12 +44,12 @@ $(document).ready(function(){
     //batch audio loader
      var sound = audioBatchLoader({
          boom: "audio/slammingcardoor.mp3",
-         smack1: "audio/stickshot1.wav",
-         smack2: "audio/stickshot2.wav",
-         smack3: "audio/stickshot3.wav",
-         tsst1: "audio/timpani_bowl_roots001.wav",
-         tsst2: "audio/timpani_bowl_roots002.wav",
-         tsst3: "audio/timpani_bowl_roots003.wav"
+         smack1: "audio/stickshot1.mp3",
+         smack2: "audio/stickshot2.mp3",
+         smack3: "audio/stickshot3.mp3",
+         tsst1: "audio/timpani_bowl_roots001.mp3",
+         tsst2: "audio/timpani_bowl_roots002.mp3",
+         tsst3: "audio/timpani_bowl_roots003.mp3"
      });
     
     //Random number between 1 and 3 for Round Robin
@@ -107,12 +107,4 @@ $(document).ready(function(){
     $(document).keyup(function(){
         $('.trigger').removeClass('hit');
     });
-});
-
-
-
-    
-    
-    
-    
-    
+}); 
