@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-    var context = new (window.AudioContext || window.webkitAudioContext)();
-    var playSound = undefined;
+    var context = new (window.AudioContext || window.webkitAudioContext)(),
+        playSound = undefined;
     
     function audioFileLoader(fileDirectory) {
         var soundObj = {};
@@ -30,13 +30,7 @@ $(document).ready(function(){
             playSound.stop(context.currentTime)
         }
         
-        //creating a GAIN node
-        //var gainNode = context.createGain();
-        //playSound.connect(gainNode);
-        //gainNode.connect(context.destination);
-
         return soundObj;
-
     };
 
     //loop through list of audio files
@@ -66,18 +60,17 @@ $(document).ready(function(){
 
     //Play sound with Round Robin
     function roundRobinPlay (sound1, sound2, sound3, trigger) {
-        var sounds = [sound1, sound2, sound3];
-        var rr = randomNum();
+        var sounds = [sound1, sound2, sound3],
+            rr = randomNum();
+        
         if ((sound2 !== null) && (sound3 !== null)){
             sounds[rr].play(context.currentTime);
             trigger.addClass('hit');
-        }
-        else {
+        } else {
             sound1.play(context.currentTime);
             trigger.addClass('hit');
         }
     }
-    
     
     /*-----Trigger sounds-----*/
     
@@ -85,14 +78,11 @@ $(document).ready(function(){
     $('.trigger').mousedown(function(){
         if ($(this).hasClass('boom')){
             roundRobinPlay(sound.boom, null, null, $('.boom'));
-        }
-        else if ($(this).hasClass('smack')){
+        } else if ($(this).hasClass('smack')){
             roundRobinPlay(sound.smack1, sound.smack2, sound.smack3, $('.smack'));
-        }
-        else if ($(this).hasClass('tsst')){
+        } else if ($(this).hasClass('tsst')){
             roundRobinPlay(sound.tsst1, sound.tsst2, sound.tsst3, $('.tsst'));
-        }
-        else {
+        } else {
             console.log('ERROR');
         }
     });
@@ -105,14 +95,11 @@ $(document).ready(function(){
     $(document).keydown(function(e){
         if (e.which == 66){
             roundRobinPlay(sound.boom, null, null, $('.boom'));
-        }
-        else if (e.which == 78){
+        } else if (e.which == 78){
             roundRobinPlay(sound.smack1, sound.smack2, sound.smack3, $('.smack'));
-        }
-        else if (e.which == 77) {
+        } else if (e.which == 77) {
             roundRobinPlay(sound.tsst1, sound.tsst2, sound.tsst3, $('.tsst'));
-        }
-        else {
+        } else {
             console.log('ERROR');
         }
     });
